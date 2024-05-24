@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Recette</title>
+{% endblock %}
+
+{% block content %}
+    <h2>Recette</h2>
+    <input type="text" id="search" name="q" placeholder="Rechercher une recette" value="{{ request.GET.q }}" style="width:100%">
+    <table class="list">
+        <thead>
+            <tr class="list_item">
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="list" id="list_filtering">
+        {% for object in recipes %}
+        
+        <tr class="list_item">
+            <td>{{ object }}</td>
+            <td class="group_btn">
+                <a href="{% url 'recipe:edit' object.id %}" class="button">
+                    <span class="material-symbols-outlined">
+                    edit
+                    </span>
+                </a>
+                <a href="{% url 'recipe:detail' object.id %}" class="button">
+                    <span class="material-symbols-outlined">
+                    info
+                    </span>
+                </a>
+                <a href="{% url 'recipe:delete' object.id %}" class="button">
+                    <span class="material-symbols-outlined">
+                    delete
+                    </span>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'recipe:create' %}" class="button primary_btn">Ajouter une recette</a>
+    <script>
+
+        $(document).ready(function(){
+          $('#search').on('keyup', function(){
+            $.ajax({
+              url: "{% url 'recipe:list' %}",
+              data: {
+                'q': $('#search').val()
+              },
+              dataType: 'json',
+              success: function(data){
+                $('#list_filtering').html(data.html);
+              }
+            });
+          });
+        });
+        </script>
+{% endblock %}

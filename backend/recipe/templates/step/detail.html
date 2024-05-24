@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Etape</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>{{ step.text }}</h2>
+    <a href="{% url 'recipe:step_edit' step.id %}" class="button">Editer</a>
+    <a href="{% url 'recipe:step_delete' step.id %}" class"button">Supprimer</a>
+</div>
+{% endblock %}

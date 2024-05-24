@@ -1,0 +1,22 @@
+{% for object in recipes %}
+<tr class="list_item">
+  <td>{{ object }}</td>
+  <td class="group_btn">
+      <a href="{% url 'recipe:edit' object.id %}" class="button">
+          <span class="material-symbols-outlined">
+          edit
+          </span>
+      </a>
+      <a href="{% url 'recipe:detail' object.id %}" class="button">
+          <span class="material-symbols-outlined">
+          info
+          </span>
+      </a>
+      <a href="{% url 'recipe:delete' object.id %}" class="button">
+          <span class="material-symbols-outlined">
+          delete
+          </span>
+      </a>
+  </td>
+</tr>
+{% endfor %}

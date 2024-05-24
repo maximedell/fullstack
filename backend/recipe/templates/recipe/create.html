@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>{{ submit_text }}</title>
+{% endblock %}
+
+{% block content %}
+<h2>{{ submit_text }} la recette</h2>
+    <form method="post">
+        
+        {% csrf_token %}
+        {% include "bootstrap_form.html" %}
+        <button type="submit">{{ submit_text }}</button>
+    </form>
+{% endblock %}

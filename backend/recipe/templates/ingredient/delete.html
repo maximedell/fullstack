@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Supprimer ingrédient</title>
+{% endblock %}
+{% block content %}
+    <form method="post">
+        <h2>Êtes-vous sûr de vouloir supprimer cet ingrédient?</h2>
+        {% csrf_token %}
+        <div class="group_btn resize_btn">
+        <button type="submit">Oui</button>
+        <a href="{% url 'recipe:ingredient_list' %}" class="button">Non</a>
+        </div>
+    </form>
+{% endblock %}

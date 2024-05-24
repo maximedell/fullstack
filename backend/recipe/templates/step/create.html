@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Créer étape</title>
+{% endblock %}
+
+{% block content %}
+    
+    <form method="post">
+        <h2>Créer étape</h2>
+        {% csrf_token %}
+        {% include "bootstrap_form.html" %}
+        <button type="submit">Créer</button>
+    </form>
+{% endblock %}

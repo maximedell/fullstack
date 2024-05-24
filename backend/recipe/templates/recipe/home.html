@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Recette</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Recette</h2>
+    <div class="group_btn">
+        <a href="{% url 'recipe:list' %}" class="button">Liste de recettes</a>
+        <a href="{% url 'recipe:ingredient_list' %}" class="button">Liste d'ingrédients</a>
+    </div>
+</div>
+{% endblock %}

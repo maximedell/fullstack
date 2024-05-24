@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>{{ submit_text }}</title>
+{% endblock %}
+
+{% block content %}
+<h2>{{ submit_text }} l'ingrédient</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% include "bootstrap_form.html" %}
+        <h3>Valeurs nutritionnelles</h3>
+        <div id="search_nutritional_values">
+            <input type="text" id="search_input" placeholder="Rechercher une valeur nutritionnelle">
+            <div class="hidden" id="search_results"></div>
+        </div>
+        <div class="nutrional_values">
+        {{ nutritional_values.as_div }}
+        </div>
+        <button type="submit">{{ submit_text }}</button>
+    </form>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var searchUrl = '{% url "recipe:search_nutritional_values" %}';
+            $('#search_input').on('input', function () {
+                var query = $(this).val();
+                if (query.length > 2) { // Start searching after typing 3 characters
+                    $.ajax({
+                        url: searchUrl,
+                        data: { 'q': query },
+                        dataType: 'json',
+                        success: function (data) {
+                            $('#search_results').empty();
+                            if (data && data.results && data.results.length) { // Check if data is defined and contains results
+                                $.each(data.results, function (index, value) {
+                                    $('#search_results').append(
+                                        '<a href="" class="search_result result-item" data-id="' + value.id + '" data-name="' + value.name + '" data-energy="' + value.energy + '" data-fat="' + value.fat + '" data-saturated_fat="' + value.saturated_fat + '" data-carbohydrates="' + value.carbohydrates + '" data-sugars="' + value.sugar + '" data-proteins="' + value.protein + '" data-salt="' + value.salt + '" data-fiber="'+ value.fruits_vegetables_nuts +'">' + value.name + '</a>'
+                                    );
+                                });
+                                $('#search_results').removeClass('hidden');
+                            } else {
+                                $('#search_results').addClass('hidden');
+                            }
+                        }
+                    });
+                } else {
+                    $('#search_results').empty().addClass('hidden');
+                }
+            });
+        
+            // Event handler for click on search results
+            $(document).on('click', '.search_result', function (e) {
+                e.preventDefault();
+                var selectedData = {
+                    name: $(this).data('name'),
+                    energy: parseFloat($(this).data('energy')),
+                    fat: parseFloat($(this).data('fat')),
+                    saturated_fat: parseFloat($(this).data('saturated_fat')),
+                    carbohydrates: parseFloat($(this).data('carbohydrates')),
+                    sugars: parseFloat($(this).data('sugars')),
+                    proteins: parseFloat($(this).data('proteins')),
+                    salt: parseFloat($(this).data('salt')),
+                    fruits_vegetables_nuts: parseFloat($(this).data('fiber'))
+                };
+                // Fill appropriate fields with selected values
+                $("input#id_name").val(selectedData.name);
+                $("#id_nutritionalvalue_set-0-name").val(selectedData.name);
+                $("#id_nutritionalvalue_set-0-energy").val(selectedData.energy);
+                $("#id_nutritionalvalue_set-0-fat").val(selectedData.fat);
+                $("#id_nutritionalvalue_set-0-saturated_fat").val(selectedData.saturated_fat);
+                $("#id_nutritionalvalue_set-0-carbohydrates").val(selectedData.carbohydrates);
+                $("#id_nutritionalvalue_set-0-sugar").val(selectedData.sugars);
+                $("#id_nutritionalvalue_set-0-protein").val(selectedData.proteins);
+                $("#id_nutritionalvalue_set-0-salt").val(selectedData.salt);
+                $("#id_nutritionalvalue_set-0-fruits_vegetables_nuts").val(selectedData.fruits_vegetables_nuts);
+                $('#search_results').empty().addClass('hidden');
+            });
+        });
+    </script>
+{% endblock %}

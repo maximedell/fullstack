@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Liste d'ingrédients</title>
+{% endblock %}
+{% block content %}
+    <h2>Liste d'ingrédients</h2>
+    
+    <input type="text" id="search" name="q" placeholder="Rechercher un ingrédient" value="{{ request.GET.q }}" style="width:100%">
+    <table class="list">
+        <thead>
+            <tr class="list_item">
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="list" id="list_filtering">
+        {% for object in ingredients %}
+        
+        <tr class="list_item">
+            <td>{{ object }}</td>
+            <td class="group_btn">
+                <a href="{% url 'recipe:ingredient_edit' object.id %}" class="button">
+                    <span class="material-symbols-outlined">
+                    edit
+                    </span>
+                </a>
+                <a href="{% url 'recipe:ingredient_detail' object.id %}" class="button">
+                    <span class="material-symbols-outlined">
+                    info
+                    </span>
+                </a>
+                <a href="{% url 'recipe:ingredient_delete' object.id %}" class="button">
+                    <span class="material-symbols-outlined">
+                    delete
+                    </span>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'recipe:ingredient_create' %}" class="button primary_btn">Ajouter un ingrédient</a>
+    <script>
+        $(document).ready(function(){
+          $('#search').on('keyup', function(){
+            $.ajax({
+              url: "{% url 'recipe:ingredient_list' %}",
+              data: {
+                'q': $('#search').val()
+              },
+              dataType: 'json',
+              success: function(data){
+                $('#list_filtering').html(data.html);
+              }
+            });
+          });
+        });
+        </script>
+{% endblock %}

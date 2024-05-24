@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Detail ingrédient</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Detail ingrédient</h2>
+    <h3>{{ ingredient.name }}</h3>
+    <a href="{% url 'recipe:edit' ingredient.id %}" class="button">Editer</a>
+    <a href="{% url 'recipe:delete' ingredient.id %}" class"button">Sup
+</div>
+{% endblock %}

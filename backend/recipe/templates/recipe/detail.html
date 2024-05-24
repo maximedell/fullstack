@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Detail recette</title>
+{% endblock %}
+{% block content %}
+<div class="container-detail">
+<div class="container">
+    <h2>Detail recette</h2>
+    <h3>{{ recipe }}</h3>
+    <h3>Ingredients</h3>
+    <div class="list">
+    {% for step in recipe.steps.all %}
+    <div class="list_item">
+        <h4>{{ step.ingredient }}</h4>
+        <a href="{% url 'recipe:step_detail' step.id %}" class="button">Voir</a>
+        </div>
+    {% endfor %}
+    </div>
+    <a href="{% url 'recipe:add_step' recipe_id=recipe.id %}" class="button">Ajouter une étape</a>
+</div>
+    <a href="{% url 'recipe:edit' recipe.id %}" class="button">Editer</a>
+    <a href="{% url 'recipe:delete' recipe.id %}" class="button">Supprimer</a>
+</div>
+{% endblock %}
