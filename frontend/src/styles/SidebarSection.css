@@ -1,0 +1,35 @@
+.sidebar-section {
+    background-color: #f2f2f2;
+    margin-top: 10px;
+}
+
+.sidebar-section a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar-section-children.hidden {
+    display: none;
+}
+
+.sidebar-section:hover {
+    border: 2px solid #333;
+}
+
+button.sidebar-section-title {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #f2f2f2;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}

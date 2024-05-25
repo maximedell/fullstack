@@ -1,0 +1,36 @@
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+    width: 100%;
+}
+
+form div {
+    display: flex;
+    align-items: center;
+}
+
+form div input,
+form div select {
+    margin: 5px;
+    width: 100%;
+}
+
+form div label {
+    white-space: nowrap;
+}
+
+.form h1 {
+    text-align: center;
+}
+
+form button {
+    margin-top: 20px;
+    grid-column: 1/3;
+}
+
+.form {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 20px;
+}

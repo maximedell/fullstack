@@ -1,0 +1,50 @@
+table.list {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #f2f2f2;
+    border: 1px solid #333;
+}
+
+tr.list-header {
+    background-color: #333;
+    color: #fff;
+}
+
+/* odd td #f2f2f2 */
+/* even td #ffffff */
+tr.list-row:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+tr.list-row:nth-child(even) {
+    background-color: #ffffff;
+}
+
+
+tr.list-row:hover {
+    border: 2px solid #333;
+}
+
+div.list-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+td.list-cell {
+    border-left: 1px solid #333;
+    padding-left: 10px;
+}
